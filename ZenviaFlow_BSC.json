@@ -1,0 +1,60 @@
+{
+  "alias": "Teste",
+  "description": "",
+  "steps": [
+    {
+      "id": "step0",
+      "type": "callComponent",
+      "label": "Integração Watson",
+      "properties": {
+        "componentId": "a531c540-9627-4fbf-891b-567ea61b7a64"
+      },
+      "inputs": {
+        "intents": "''",
+        "authorization_Watson": "'Basic YXBpa2V5OklWbU42TmdyN3JDZWZ2SDlkMFYzSjQ4RGxCLXBoalk5OXA0ellneHJNQUND'",
+        "url_Watson": "'https://api.us-south.assistant.watson.cloud.ibm.com/'",
+        "resource_Watson": "'instances/1ff49bda-0969-4b43-b1b5-70a7498307ad/v2/assistants/7c3f8774-0d51-45c3-8d76-c0a5f6c9e815/message?version=2020-04-01'"
+      }
+    },
+    {
+      "id": "idEventoInicial",
+      "type": "whatsappEvent",
+      "label": "Evento inicial",
+      "properties": {
+        "startEvent": "true",
+        "appId": "whatsapp_chatbot",
+        "appType": "chatbot"
+      },
+      "variables": {
+        "whatsappFrom": "'best-voyage'"
+      },
+      "conditions": [
+        {
+          "type": "channelSourceCondition",
+          "values": [
+            "best-voyage"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "idEventoFinal",
+      "type": "endEvent",
+      "label": "label 3",
+      "properties": {
+        "endEvent": "true"
+      }
+    }
+  ],
+  "connections": [
+    {
+      "from": "step0",
+      "to": "idEventoFinal"
+    },
+    {
+      "from": "idEventoInicial",
+      "to": "step0"
+    }
+  ],
+  "defaultConversationalChannel": "WHATSAPP"
+}
